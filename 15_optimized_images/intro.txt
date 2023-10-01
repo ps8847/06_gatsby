@@ -1,0 +1,58 @@
+THE STATIC FOLDER IMAGES ARe HEAVY .
+
+we want to optimize that : 
+
+command is :
+npm i gatsby-image gatsby-transformer-sharp gatsby-plugin-sharp
+
+1) firts make a folder images in src
+
+2) move a image in that folder 
+
+3) update the ocnfig file like this below :
+
+        module.exports = {
+        plugins: ['gatsby-transformer-remark','gatsby-transformer-sharp','gatsby-plugin-sharp',
+        {
+            resolve:`gatsby-source-filesystem`,
+            options:{
+            name:`notes2`,
+            path:`${__dirname}/src/notes2/`
+            }
+        },{
+            resolve:`gatsby-source-filesystem`,
+            options:{
+            name:`images`,
+            path:`${__dirname}/src/images/`
+            }
+        }],
+        siteMetadata:{
+            title:"Prince Sharma",
+            description:"wbe dev portfolio",
+            copyright:"2023 prince sharma",
+            contact:"ps789650@gmail.com"
+        }
+        }
+
+4) get that image now :
+
+import Img from "gatsby-image"
+
+export default function Home({data}) {
+
+  return (
+        <Img fluid={data.file.childImageSharp.fluid} />
+  );
+}
+
+export const query = graphql`
+query MyQuery {
+  file(relativePath: {eq: "demo.png"}){
+    childImageSharp{
+      fluid{
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+}
+`

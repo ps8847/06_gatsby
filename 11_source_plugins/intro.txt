@@ -1,0 +1,40 @@
+The sourcing of the dtaa into our gatsBy filesystem is amazing : 
+
+1) first we will installa  plugin to soruce the data .
+	one of the famous to inetract with file system is : npm install gatsby-source-filesystem
+
+2) now in gatsby-config.js : 
+	plugins: [{
+    resolve:`gatsby-source-filesystem`,
+    options:{
+      name:`notes`,
+      path:`${__dirname}/src/notes/`
+    }
+  }]
+
+  now , we wil have access to the notes folder's all content , 
+
+  To check that . In the http://localhost:8000/___graphq ,, we can run this query below : 
+	query MyQuery
+	{
+  		allFile
+		{
+    		nodes
+			{
+      			relativePath
+    		}
+  		}
+	}
+
+3) now if i want to access any other folder's data also , i can add another object like this below : 
+	now after running the query again , we wil see it iwll show all the files from both the fodlers ,
+
+	but to show only particular folder's data only we can do it like this : 
+
+	query MyQuery {
+		allFile(filter : {sourceInstanceName : {eq : "notes"}}){
+    	nodes{
+      		relativePath
+    		}
+  		}
+	}

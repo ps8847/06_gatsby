@@ -1,0 +1,21 @@
+in the website of gatsby , we will get so many starter templates of gatsby ..
+
+for us for now  , we will serahc for "hello world" 
+
+.....
+
+the main thing is to use that "hello world" gatsby template is  , we will get the gastby configurations and setups all from beginning ,, same as we get during create-react-app
+
+.. so continue 
+go to the website  : https://www.gatsbyjs.com/starters/
+
+and this is that starter template  : https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-hello-world/  ,,,,
+but..........
+
+before running the comman to downlaod and run that template : ,, first run thsi comand below  : 
+
+npm install -g gatsby-cli
+
+now the main command is : npx gatsby new gatsby-starter-hello-world https://github.com/gatsbyjs/gatsby-starter-hello-world
+
+now to run that , type "gatsby develop"

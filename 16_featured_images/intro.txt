@@ -1,0 +1,63 @@
+now we wnat to show the multiple images with our data in the projects page
+
+for that we will first add the images path in the notes2 folder's all .md files
+
+like this below : 
+
+---
+title: The Dojo Coffee House
+stack: HTML & CSS
+slug: the-dojo-coffee-house
+date: 2021-01-01T00:00:00+00:00
+thumb: ../images/thumbs/coffee.png
+featuredImg: ../images/featured/coffee-banner.png
+
+
+and also in the projects.js change the query structure like below : 
+
+import React from "react";
+import "../styles/global.css"
+import Layout from "../Components/Layout";
+import Img from "gatsby-image"
+import {portfolio , projectscss} from "../styles/projects.module.css"
+import { Link, graphql } from "gatsby";
+
+export default function projects({data}) {
+
+  console.log(data);
+
+  let projects = data.projects.nodes;
+  let contact = data.contact.siteMetadata.contact
+
+  return (
+            <Img fluid={project.frontmatter.thumb.childImageSharp.fluid}/>
+  );
+}
+
+export const query = graphql`
+query notes2{
+  projects : allMarkdownRemark(sort: {fields: frontmatter___date , order: DESC}){
+    nodes{
+      html
+      frontmatter{
+        slug
+        title
+        stack
+        thumb {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+      id
+    }
+  }
+  contact : site{
+    siteMetadata{
+      contact
+    }
+  }
+}
+`

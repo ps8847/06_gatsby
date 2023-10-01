@@ -1,0 +1,3 @@
+any file at static folder is accessible by 
+
+http://localhost:8000/filename.extensionoffile

@@ -1,0 +1,33 @@
+Wwe will first install the "gatsby-transformer-remark"  ,, will rmeove the folder "notes" form previous tutorial and also rmeove the file foo2 and bar2 from notes2 folder
+
+now : 
+
+1) in the gatsby-config.js will be configure it like this : 
+
+      plugins: ['gatsby-transformer-remark',
+  {
+    resolve:`gatsby-source-filesystem`,
+    options:{
+      name:`notes2`,
+      path:`${__dirname}/src/notes2/`
+    }
+  }],
+
+2) now to explore and check that make a file in the notes2 folder names anything with extention "md"
+    dojo-coffee.md 
+
+    and add content in it 
+
+3) now run this query to se ethe outout of that content file   
+
+    query MyQuery {
+  allMarkdownRemark{
+    nodes{
+      html
+      frontmatter{
+        title
+        stack
+      }
+    }
+  }
+}

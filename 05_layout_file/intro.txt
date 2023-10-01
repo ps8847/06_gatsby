@@ -1,0 +1,6 @@
+we can create layout to simplify our routing more in efficient way : 
+
+make a component ->
+	example : Layout.js 
+
+pack the other components inside <Layout> </Layout>    ,, thats it

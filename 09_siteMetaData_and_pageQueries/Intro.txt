@@ -1,0 +1,52 @@
+For site meta dtaa we can add it at : 
+
+gatsby-config.js file  , like this below : 
+
+/**
+ * Configure your Gatsby site with this file.
+ *
+ * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
+ */
+
+/**
+ * @type {import('gatsby').GatsbyConfig}
+ */
+module.exports = {
+  plugins: [],
+  SiteMetadata:{
+    title:"Prince Sharma",
+    description:"wbe dev portfolio",
+    copyright:"2023 prince sharma"
+  }
+}
+
+
+//  now how wil it work ?
+
+1) go to the link http://localhost:8000/___graphql 
+
+2) Now click in the Docs  >>   site > SiteSiteMetaData >> and run it
+
+3) but to us ethat data in our website we can use it like below : 
+
+import { Link, graphql } from "gatsby";
+export default function Home({data}) {
+
+  const {title , description , copyright} = data.site.SiteMetadata
+
+  return (
+        <p>{title} - {description} - </p>
+        <p>{copyright}</p>
+  );
+}
+
+export const query = graphql`
+query SiteInfo {
+  site {
+    SiteMetadata {
+      copyright
+      description
+      title
+    }
+  }
+}`

@@ -1,0 +1,101 @@
+we can make a single component template and can use it as the gatsby will automatically make it for us :
+
+firts we need ot make a folder : templates 
+and of rour requiredmenet w ewill make a file : project-details.js
+
+it will look likr this  :  
+
+import React from 'react'
+import Layout from "../Components/Layout";
+import Img from "gatsby-image";
+import {details , featured , html} from "../styles/project-details.module.css"
+
+export default function ProjectDetails() {
+  return (
+    <Layout>
+        <div className={details}>
+            <h2>title</h2>
+            <h3>stack</h3>
+            <div className={featured}>
+                <Img fluid={} />
+            </div>
+            <div className={html} dangerouslySetInnerHTML={} />
+        </div>
+    </Layout>
+  )
+}
+
+
+// now we will geenrate pages with gatsby
+
+ go to the root directory and make the file "gatsby-node.js" and will dinamically create the pages wiht the help of jaavscript and nodejs
+
+    const path = require("path");
+
+    exports.createPages = async ({graphql , actions}) => {
+
+        const {data} = await graphql(`
+        query Projects{
+            allMarkdownRemark {
+                nodes {
+                    frontmatter{
+                        slug
+                    }
+                }
+            }
+        }
+        `)
+
+        data.allMarkdownRemark.nodes.forEach(node => {
+            actions.createPage({
+                path:"/projects/"+node.frontmatter.slug,
+                component:path.resolve('./src/templates/project-details.js'),
+                content: {slug: node.frontmatter.slug}
+            })
+        })
+    }
+
+
+
+after this we can fetch an show the data with thius kind of code below : 
+
+import React from 'react'
+import Layout from "../Components/Layout";
+import Img from "gatsby-image";
+import {details , featured , html} from "../styles/project-details.module.css"
+import { graphql } from 'gatsby';
+
+export default function ProjectDetails({data}) {
+    
+  return (
+    <Layout>
+        <div className={details}>
+            <h2>{data.markdownRemark.frontmatter.title}</h2>
+            <h3>{data.markdownRemark.frontmatter.stack}</h3>
+            <div className={featured}>
+                <Img fluid={data.markdownRemark.frontmatter.featuredImg.childImageSharp.fluid} />
+            </div>
+            <div className={html} dangerouslySetInnerHTML={{__html : data.markdownRemark.html}} />
+        </div>
+    </Layout>
+  )
+}
+
+export const query = graphql`
+query ProjectsDetails($slug:String){
+    markdownRemark(frontmatter: {slug: {eq: $slug}}){
+        html
+        frontmatter{
+            stack
+            title
+            featuredImg{
+                childImageSharp{
+                    fluid{
+                        ...GatsbyImageSharpFluid
+                    }
+                }
+            }
+        }
+    }
+}
+`

@@ -1,0 +1,10 @@
+here  , in src>pages> index.js ,, is defautl page we get , http://localhost:8000/
+
+now we will create a about.js ...
+
+shockingly , the about.js page can be viwed in browser with the path : http://localhost:8000/about/
+
+for nested routes  , we just need to create folders inside pages folder , ,
+ to access test.js >> http://localhost:8000/projects/test
+
+ but ,, another amazing feature is : to access index.js >> http://localhost:8000/projects   only...

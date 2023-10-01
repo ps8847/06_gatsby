@@ -1,0 +1,87 @@
+Now we will show the dataa on the frontend by taling them from the three files example :
+    notes2/dojo-coffee.md
+    notes2/dojo-coffee2.md
+    notes2/dojo-coffee3.md
+
+In the projects page we will perform this tutorial :
+
+1) the gatsby-config.js should be like this : 
+    plugins: ['gatsby-transformer-remark',
+  {
+    resolve:`gatsby-source-filesystem`,
+    options:{
+      name:`notes2`,
+      path:`${__dirname}/src/notes2/`
+    }
+  }],
+
+2) now to chekc the query is running fine run this below in the query : 
+    query notes2{
+    allMarkdownRemark{
+        nodes{
+        html
+        frontmatter{
+            slug
+            title
+            stack
+        }
+        id
+        }
+    }
+    }
+
+3) make the code structure like this : 
+    
+    import { Link, graphql } from "gatsby";
+
+    export default function projects({data}) {
+
+    let projects = data.allMarkdownRemark.nodes;
+
+    return (
+
+        {projects.map(project => (
+            <Link to={"/projects/" + project.frontmatter.slug} key={project.id}>
+            <div>
+                <h3>{project.frontmatter.title}</h3>
+                <p>{project.frontmatter.stack}</p>
+            </div>
+            </Link>
+        ))}
+
+    );
+    }
+
+    export const query = graphql`
+    query notes2{
+    allMarkdownRemark{
+        nodes{
+        html
+        frontmatter{
+            slug
+            title
+            stack
+        }
+        id
+        }
+    }
+    }
+    `
+
+    Thats it. 
+
+4) Now for Sorting and ordering 
+
+    query notes2{
+    allMarkdownRemark(sort: {fields: frontmatter___date , order: DESC}){
+        nodes{
+        html
+        frontmatter{
+            slug
+            title
+            stack
+            }
+        id
+        }
+        }
+    }

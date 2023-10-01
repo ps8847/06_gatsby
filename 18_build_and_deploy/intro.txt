@@ -1,0 +1,24 @@
+topix 1  :  simple deploement
+
+just type : gatby build
+
+we will deploy it to netlify
+
+after the build ,  just drag the Public fodler into netlify
+
+topic 2 : continuious deployement
+
+1) Make a repo at github : 
+    run these two lines of that repo here in terminal   :
+         git remote add origin https://github.com/ps8847/gatsby-website.git
+         git branch -M main
+         git add .
+         git commit -m "message"
+         git push origin main
+
+    after successfull upload go to netlify and choose ehte option of "deploy with netlify"  , chpose your project and upload it
+
+    now form now on wheneevr you will chnage anything here just push it to github and that willl be reflected to that also 
+
+
+    Thats all about GATSBY
